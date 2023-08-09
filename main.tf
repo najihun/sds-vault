@@ -186,9 +186,9 @@ data "tfe_organization" "test-org" {
   name = "najihun"
 }
 
-resource "tfe_project" "project-sds" {
+resource "tfe_project" "ubuntu_2023" {
   organization = data.tfe_organization.test-org.name
-  name         = "project-sds"
+  name         = "ubuntu_2023"
 }
 
 resource "tfe_workspace" "image_driven" {
