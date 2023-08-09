@@ -182,18 +182,18 @@ resource "local_file" "public_key" {
 //////////////////////////////
 // TFC
 //////////////////////////////
-data "tfe_organization" "gs_biz" {
-  name = "great-stone-biz"
+data "tfe_organization" "test-org" {
+  name = "najihun"
 }
 
-resource "tfe_project" "ubuntu_2023" {
-  organization = data.tfe_organization.gs_biz.name
-  name         = "ubuntu-2023"
+resource "tfe_project" "project-sds" {
+  organization = data.tfe_organization.test-org.name
+  name         = "project-sds"
 }
 
 resource "tfe_workspace" "image_driven" {
   name         = "ubuntu-ssh"
-  organization = data.tfe_organization.gs_biz.name
+  organization = data.tfe_organization.test-org.name
   project_id   = tfe_project.ubuntu_2023.id
 
   tag_names = [
@@ -204,7 +204,7 @@ resource "tfe_workspace" "image_driven" {
 
 resource "tfe_workspace" "ubuntu_ansible" {
   name         = "ubuntu-ansible-terraform"
-  organization = data.tfe_organization.gs_biz.name
+  organization = data.tfe_organization.test-org.name
   project_id   = tfe_project.ubuntu_2023.id
 
   tag_names = [
@@ -216,7 +216,7 @@ resource "tfe_workspace" "ubuntu_ansible" {
 resource "tfe_variable_set" "hcp_vault" {
   name         = "HCP-Vault-Dynamic"
   description  = "HCP Vault Dynamic Privider Credentials"
-  organization = data.tfe_organization.gs_biz.name
+  organization = data.tfe_organization.test-org.name
 }
 
 resource "tfe_project_variable_set" "ubuntu_2023" {
